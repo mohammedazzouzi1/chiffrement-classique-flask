@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cryptage — AZZOUZI Mohammed</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+
+  <div class="bg-orb bg-orb--tl"></div>
+  <div class="bg-orb bg-orb--br"></div>
+  <div class="bg-lines"></div>
+
+  <div class="wrapper">
+
+    <!-- ═══════════════════════════════
+         SIDEBAR LEFT
+    ═══════════════════════════════ -->
+    <aside class="sidebar sidebar--left">
+      <div class="sb-top-rule"></div>
+
+      <!-- Algorithmes -->
+      <div class="sb-section">
+        <p class="sb-heading">Algorithmes</p>
+        <ul class="sb-list">
+          <li><span class="sb-dot">◆</span>César</li>
+          <li><span class="sb-dot">◆</span>Vernam</li>
+          <li><span class="sb-dot">◆</span>Vigenère</li>
+        </ul>
+      </div>
+
+      <div class="sb-rule"></div>
+
+      <!-- Fondé sur -->
+      <div class="sb-section">
+        <p class="sb-heading">Fondé sur</p>
+        <ul class="sb-list">
+          <li>Substitution</li>
+          <li>XOR binaire</li>
+          <li>Polyalpha.</li>
+        </ul>
+      </div>
+
+      <div class="sb-rule"></div>
+
+      <!-- Décalage César -->
+      <div class="sb-section">
+        <p class="sb-heading">Décalage César</p>
+        <div class="sb-cipher">
+          <div class="cipher-row"><span class="c-from">A</span><span class="c-arr">→</span><span class="c-to">D</span></div>
+          <div class="cipher-row"><span class="c-from">B</span><span class="c-arr">→</span><span class="c-to">E</span></div>
+          <div class="cipher-row"><span class="c-from">Z</span><span class="c-arr">→</span><span class="c-to">C</span></div>
+        </div>
+      </div>
+
+      <div class="sb-rule"></div>
+
+      <!-- Complexité -->
+      <div class="sb-section">
+        <p class="sb-heading">Complexité</p>
+        <ul class="sb-list sb-list--mono">
+          <li><span class="sb-key">César</span><span class="sb-val">O(n)</span></li>
+          <li><span class="sb-key">Vernam</span><span class="sb-val">O(n)</span></li>
+          <li><span class="sb-key">Vigenère</span><span class="sb-val">O(n·k)</span></li>
+        </ul>
+      </div>
+
+      <div class="sb-rule"></div>
+
+      <!-- Alphabet -->
+      <div class="sb-section">
+        <p class="sb-heading">Alphabet</p>
+        <div class="sb-alpha">
+          A B C D E F G H I J K L M
+          N O P Q R S T U V W X Y Z
+        </div>
+        <p class="sb-alpha-count">26 lettres</p>
+      </div>
+
+      <div class="sb-rule"></div>
+
+      <!-- Niveau sécurité -->
+      <div class="sb-section">
+        <p class="sb-heading">Niveau sécurité</p>
+        <div class="sb-meter">
+          <div class="meter-row">
+            <span class="meter-label">César</span>
+            <div class="meter-bar"><div class="meter-fill" style="width:20%"></div></div>
+          </div>
+          <div class="meter-row">
+            <span class="meter-label">Vigenère</span>
+            <div class="meter-bar"><div class="meter-fill" style="width:55%"></div></div>
+          </div>
+          <div class="meter-row">
+            <span class="meter-label">Vernam</span>
+            <div class="meter-bar"><div class="meter-fill meter-fill--full" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sb-rule"></div>
+      <div class="sb-vtext">CHIFFREMENT</div>
+    </aside>
+
+    <!-- ═══════════════════════════════
+         MAIN
+    ═══════════════════════════════ -->
+    <main class="page">
+
+      <header class="hero">
+        <div class="eyebrow-row">
+          <div class="ey-line"></div>
+          <span class="ey-text">Système de Cryptographie</span>
+          <div class="ey-line"></div>
+        </div>
+        <div class="hero-titles">
+          <span class="h1-main">Cryptage</span>
+          <span class="h1-sub"><em>AZZOUZI</em> Mohammed</span>
+        </div>
+        <p class="hero-algos">César &nbsp;·&nbsp; Vernam &nbsp;·&nbsp; Vigenère</p>
+        <div class="hero-div">
+          <div class="hd-line"></div>
+          <span class="hd-gem">◆</span>
+          <div class="hd-line"></div>
+        </div>
+      </header>
+
+      <section class="controls glass-panel">
+        <div class="ctrl-col">
+          <p class="ctrl-lbl">Algorithme</p>
+          <div class="tbar" id="algo-group">
+            <button class="tbtn active" id="btn-cesar"    data-algo="cesar">César</button>
+            <button class="tbtn"        id="btn-vernam"   data-algo="vernam">Vernam</button>
+            <button class="tbtn"        id="btn-vigenere" data-algo="vigenere">Vigenère</button>
+          </div>
+        </div>
+        <div class="ctrl-div"></div>
+        <div class="ctrl-col">
+          <p class="ctrl-lbl">Action</p>
+          <div class="tbar" id="action-group">
+            <button class="tbtn active" id="btn-encrypt" data-action="chiffrement">Chiffrement</button>
+            <button class="tbtn"        id="btn-decrypt" data-action="dechiffrement">Déchiffrement</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="inputs">
+        <div class="inp-card glass-panel">
+          <label class="inp-label" for="input-text">
+            <span class="inp-num">01</span>
+            <span class="inp-name">Texte source</span>
+            <span class="inp-hint">lettres A–Z uniquement</span>
+          </label>
+          <textarea id="input-text" rows="6"
+            placeholder="Entrez votre texte ici…" spellcheck="false"></textarea>
+        </div>
+
+        <div class="inp-card glass-panel">
+          <label class="inp-label" for="input-key">
+            <span class="inp-num">02</span>
+            <span class="inp-name">Clé secrète</span>
+            <span class="inp-hint" id="key-hint">nombre entier</span>
+          </label>
+          <input type="text" id="input-key"
+            placeholder="Ex: 3" spellcheck="false" autocomplete="off"/>
+          <button class="btn-run" id="btn-run" type="button">
+            <span class="btn-label">Exécuter</span>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" class="btn-arrow">
+              <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <p class="error-msg" id="error-msg"></p>
+        </div>
+      </section>
+
+      <section class="result-wrap glass-panel">
+        <div class="rw-header">
+          <span class="rw-title">Résultat</span>
+          <div class="rw-line">
+            <div class="rwl-inner"></div>
+            <span class="rw-gem">◆</span>
+            <div class="rwl-inner"></div>
+          </div>
+        </div>
+        <div class="rw-placeholder" id="output-placeholder">
+          Remplissez les champs ci-dessus puis cliquez sur <strong>Exécuter</strong>.
+        </div>
+        <div class="result-box hidden" id="result-box">
+          <span class="res-tag">// output</span>
+          <div class="res-val" id="result-value"></div>
+          <button class="btn-copy" id="btn-copy" title="Copier">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+              <rect x="6" y="6" width="10" height="10" rx="2"
+                stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 6V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"
+                stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <div class="foot-line"></div>
+        <span class="foot-text">Projet Cryptage — AZZOUZI Mohammed</span>
+        <div class="foot-line foot-line--r"></div>
+      </footer>
+
+    </main>
+
+    <!-- ═══════════════════════════════
+         SIDEBAR RIGHT
+    ═══════════════════════════════ -->
+    <aside class="sidebar sidebar--right">
+      <div class="sb-top-rule"></div>
+
+      <!-- Sécurité -->
+      <div class="sb-section">
+        <p class="sb-heading">Sécurité</p>
+        <ul class="sb-list">
+          <li>Clé symétrique</li>
+          <li>Chiffrement flux</li>
+          <li>Clé aléatoire</li>
+        </ul>
+      </div>
+
+      <div class="sb-rule"></div>
+
+      <!-- Citation -->
+      <div class="sb-quote-block">
+        <div class="quote-mark">"</div>
+        <p class="sb-quote">Un message chiffré est une armure de mots.</p>
+      </div>
+
+      <div class="sb-rule"></div>
+
+      <!-- Modes -->
+      <div class="sb-section">
+        <p class="sb-heading">Modes</p>
+        <ul class="sb-list">
+          <li><span class="sb-dot">◆</span>Chiffrement</li>
+          <li><span class="sb-dot">◆</span>Déchiffrement</li>
+          <li><span class="sb-dot">◆</span>Analyse</li>
+        </ul>
+      </div>
+
+      <div class="sb-rule"></div>
+
+      <!-- Clés valides -->
+      <div class="sb-section">
+        <p class="sb-heading">Format des clés</p>
+        <ul class="sb-list sb-list--mono">
+          <li><span class="sb-key">César</span><span class="sb-val">1–25</span></li>
+          <li><span class="sb-key">Vernam</span><span class="sb-val">= len(txt)</span></li>
+          <li><span class="sb-key">Vigenère</span><span class="sb-val">A–Z</span></li>
+        </ul>
+      </div>
+
+      <div class="sb-rule"></div>
+
+      <!-- Fun fact -->
+      <div class="sb-fact">
+        <p class="sb-fact-label">Le saviez-vous ?</p>
+        <p class="sb-fact-text">Le chiffre de Vernam est le seul algorithme prouvé mathématiquement incassable.</p>
+      </div>
+
+      <div class="sb-rule"></div>
+      <div class="sb-vtext">DÉCHIFFREMENT</div>
+    </aside>
+
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
